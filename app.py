@@ -156,6 +156,7 @@ response = requests.get(f"{API_BASE_URL}/prompts")
 
 if response.status_code == 200:
     prompts = response.json().get("prompts", [])
+    prompts = [p for p in prompts if p != "messagetype"]
     st.info(f"Total prompts: {len(prompts)}")
 
     for prompt in prompts:
