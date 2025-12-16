@@ -10,6 +10,9 @@ import json
 API_BASE_URL = st.secrets["API_URL"]
 password_true= st.secrets["Pass"]
 
+if "prompt_name" not in st.session_state:
+    st.session_state.prompt_name = ""
+
 def check_password():
     """Returns True if the user entered the correct password."""
     if "authenticated" not in st.session_state:
@@ -109,7 +112,10 @@ st.divider()
 st.header("📝 Upload TXT Prompt")
 
 txt_file = st.file_uploader("Select a TXT file", type=["txt"])
-prompt_name = st.text_input("Prompt name (optional)")
+prompt_name = st.text_input(
+                "Prompt name (optional)",
+                key="prompt_name"
+            )
 
 if st.button("Upload TXT"):
     if not txt_file:
@@ -120,8 +126,8 @@ if st.button("Upload TXT"):
         }
 
         data = {}
-        if prompt_name:
-            data["name"] = prompt_name
+        if st.session_state.prompt_name:
+            data["name"] = st.session_state.prompt_name
 
         response = requests.post(
             f"{API_BASE_URL}/prompts/upload-file",
@@ -131,6 +137,8 @@ if st.button("Upload TXT"):
 
         if response.status_code == 200:
             st.success("Prompt uploaded successfully")
+             # 🔄 RESET INPUT
+            st.session_state.prompt_name = ""
         else:
             st.error(response.text)
 
