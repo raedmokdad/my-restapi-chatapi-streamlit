@@ -18,18 +18,28 @@ def check_password():
     if st.session_state.authenticated:
         return True
 
-    password = st.text_input("🔐 Enter password", type="password")
+    # Add title and emoji
+    st.markdown("## 🔒 Secure Access")
+    st.markdown("Welcome! Please enter the password to access the app. 🗝️")
+    st.write("---")  # Divider for nicer design
 
-    if st.button("Login"):
+    # Centering the input box
+    password = st.text_input("Password", type="password", placeholder="Enter your secret password 🔑")
+
+    # Add some vertical space
+    st.write("\n")
+
+    if st.button("Login 🔓"):
         if password_true == password:
             st.session_state.authenticated = True
+            st.success("✅ Login successful!")
             st.rerun()
         else:
-            st.error("Incorrect password")
+            st.error("❌ Incorrect password. Try again!")
 
     return False
 
-
+# Usage
 if not check_password():
     st.stop()
 
