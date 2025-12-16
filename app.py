@@ -44,10 +44,37 @@ if not check_password():
     st.stop()
 
 
+# Page config
+st.set_page_config(
+    page_title="API Manager",
+    page_icon="🛠️",
+    layout="centered"
+)
 
-st.set_page_config(page_title="Prompt Manager", layout="centered")
+# Custom CSS for larger, centered title
+st.markdown("""
+    <style>
+    .main-title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    .subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #34495e;
+        margin-bottom: 2rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-st.title("API Manager")
+# Main title and subtitle
+st.markdown('<div class="main-title">🛠️ API Manager</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Manage files, uploads, downloads, and all in one place.</div>', unsafe_allow_html=True)
+
+# Optional divider for cleaner separation
+st.write("---")
 
 # ======================
 # UPLOAD JSON FILE
