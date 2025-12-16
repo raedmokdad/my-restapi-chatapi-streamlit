@@ -166,7 +166,7 @@ if response.status_code == 200:
 
         # ⬇️ Download
         with col2:
-            download_url = f"{API_BASE_URL}/prompts/download/{prompt}"
+            download_url = f"{API_BASE_URL}/prompts/download/{prompt}.txt"
             st.download_button(
                 label="⬇️ Download",
                 data=requests.get(download_url).content,
