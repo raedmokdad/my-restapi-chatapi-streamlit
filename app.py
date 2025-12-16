@@ -79,6 +79,11 @@ st.markdown('<div class="subtitle">Manage files, uploads, downloads, and all in 
 # Optional divider for cleaner separation
 st.write("---")
 
+
+def reset_prompt_name():
+    st.session_state.prompt_name = ""
+
+
 # ======================
 # UPLOAD JSON FILE
 # ======================
@@ -117,7 +122,7 @@ prompt_name = st.text_input(
                 key="prompt_name"
             )
 
-if st.button("Upload TXT"):
+if st.button("Upload TXT", on_click=reset_prompt_name):
     if not txt_file:
         st.warning("Please select a TXT file")
     else:
@@ -137,8 +142,6 @@ if st.button("Upload TXT"):
 
         if response.status_code == 200:
             st.success("Prompt uploaded successfully")
-             # 🔄 RESET INPUT
-            st.session_state.prompt_name = ""
         else:
             st.error(response.text)
 
