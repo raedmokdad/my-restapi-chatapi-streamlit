@@ -134,6 +134,47 @@ if st.button("Upload TXT"):
         else:
             st.error(response.text)
 
+
+st.divider()
+
+# ======================
+# UPLOAD System TXT PROMPT
+# ======================
+st.header("📝 Upload System TXT Prompt")
+
+txt_file = st.file_uploader("Select messagetype.txt", type=["txt"])
+
+if st.button("Upload TXT"):
+    if not txt_file:
+        st.warning("Please select a TXT file")
+    elif txt_file.name != "messagetype.txt":
+        st.error("File must be named exactly 'messagetype.txt'")
+    else:
+        files = {
+            "file": (
+                txt_file.name,
+                txt_file.getvalue(),
+                "text/plain"
+            )
+        }
+
+        try:
+            response = requests.post(
+                f"{API_BASE_URL}/prompts/upload-system-file",
+                files=files,
+                timeout=15
+            )
+
+            if response.status_code == 200:
+                st.success("Prompt uploaded successfully")
+            else:
+                st.error(response.text)
+
+        except Exception as e:
+            st.error(f"Upload failed: {e}")
+
+
+
 st.divider()
 
 
