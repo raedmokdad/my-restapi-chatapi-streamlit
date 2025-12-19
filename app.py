@@ -142,18 +142,18 @@ st.divider()
 # ======================
 st.header("📝 Upload System TXT Prompt")
 
-txt_file = st.file_uploader("Select messagetype.txt", type=["txt"])
+txt_file_system = st.file_uploader("Select messagetype.txt", type=["txt"])
 
-if st.button("Upload TXT"):
-    if not txt_file:
+if st.button("Upload System TXT"):
+    if not txt_file_system:
         st.warning("Please select a TXT file")
-    elif txt_file.name != "messagetype.txt":
+    elif txt_file_system.name != "messagetype.txt":
         st.error("File must be named exactly 'messagetype.txt'")
     else:
         files = {
             "file": (
-                txt_file.name,
-                txt_file.getvalue(),
+                txt_file_system.name,
+                txt_file_system.getvalue(),
                 "text/plain"
             )
         }
